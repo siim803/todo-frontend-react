@@ -130,7 +130,10 @@ export default function TaskList() {
     return (
         <Row type="flex" justify="center" style={{minHeight: '100vh', marginTop: '6rem'}}>
             <Col span={12}>
-                <h1>Task List</h1>
+                <Row justify="space-between" align="middle" style={{marginBottom: "1rem"}}>
+                    <h1>Task List</h1>
+                    <Button onClick={() => navigate("/logout")}>Logout</Button>
+                </Row>
                 <Space direction="vertical" style={{width: "100%"}}>
                     <Input
                         value={newTaskTitle}
