@@ -4,15 +4,26 @@ import { useNavigate } from "react-router";
 export default function Login() {
     const navigate = useNavigate();
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-        notification.success({
-            message: 'Logged in'
-        });
-        notification.error({
-            message: 'Wrong username or password'
-        });
-        navigate("/");
+    const onFinish = async (values) => {
+        try {
+            const response = await fetch("https://demo2.z-bit.ee/users/get-token", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: values.username,
+                    password: values.password,
+                }),
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || "Wrong username or password");
+
+            localStorage.setItem("access_token", data.access_token);
+            notification.success({ message: "Logged in" });
+            navigate("/");
+        } catch (error) {
+            notification.error({ message: error.message || "Wrong username or password" });
+        }
     };
 
     return (
