@@ -1,5 +1,5 @@
 import { Form, Input, Button, Row, Col, notification } from "antd";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -52,6 +52,9 @@ export default function Login() {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">Login</Button>
+                        <span style={{ marginLeft: "1rem" }}>
+                            Need an account? <Link to="/register">Register</Link>
+                        </span>
                     </Form.Item>
                 </Form>
             </Col>
